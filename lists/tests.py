@@ -1,16 +1,16 @@
 from django.core.urlresolvers import resolve
 from django.template.loader import render_to_string
 from django.test import TestCase
-from lists.views import home_page
+from .views import home_page
 from django.http import HttpRequest
-from lists.models import Item, List
+from .models import Item, List
+
 
 class HomePageTest(TestCase):
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
         self.assertEqual(found.func, home_page)
-
 
     def test_view_returns_correct_html(self):
         request = HttpRequest()
@@ -49,13 +49,11 @@ class ListAndItemModelsTest(TestCase):
         self.assertEqual(second_save_item.list, list_)
 
 
-
 class ListViewTest(TestCase):
 
     def test_uses_list_template(self):
         response = self.client.get('/lists/the-only-list-in-the-world/')
         self.assertTemplateUsed(response, 'list.html')
-
 
     def test_displays_all_items(self):
         Item.objects.create(text='itemey 1')
@@ -77,7 +75,6 @@ class NewListTest(TestCase):
         new_item = Item.objects.first()
         self.assertEqual(new_item.text, 'A new list item')
 
-
     def test_redirects_after_POST(self):
 
         response =  self.client.post(
@@ -88,8 +85,8 @@ class NewListTest(TestCase):
         new_list = List.objects.first()
         self.assertRedirects(response, '/lists/%d/' % (new_list.id,))
 
-class ListViewTest(TestCase):
 
+class ListViewTest(TestCase):
 
     def test_uses_list_template(self):
         list_ = List.objects.create()
@@ -110,6 +107,7 @@ class ListViewTest(TestCase):
         self.assertContains(response, 'itemey 2')
         self.assertNotContains(response, 'other itemey 1')
         self.assertNotContains(response, 'other itemey 2')
+
 
 class NewItemTest(TestCase):
 
