@@ -19,17 +19,10 @@ e.g.,, on Ubuntu:
 * see nginx.template.conf
 * replace SITENAME with, e.g., staging.my-domain.com
 
-## Systemd service start Ubuntu > 15.04
-* https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
-* > $ systemctl enable nginx.service
-* > $ systemctl enable gunicorn.socket
+## Upstartu Job
 
-#Either reboot, or start the services manually:
-
-* > $ systemctl start nginx.service
-* > $ systemctl start gunicorn.socket
-
-
+* see gunicorn-upstart.template.conf
+* replace SITENAME with, e.g., staging-mydomain.com
 
 ## Folder structure:
 Assume we have a user account at /home/username
