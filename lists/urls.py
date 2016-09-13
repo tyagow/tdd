@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from . import views
+from lists.views import NewListView, ViewAndAddToList
 
 urlpatterns = [
-    url(r'^new$', views.new_list, name='new_list'),
-    url(r'^(\d+)/$', views.view_list, name='view_list'),
+    url(r'^(?P<pk>\d+)/$', ViewAndAddToList.as_view(), name='view_list'),
+    url(r'^new$', NewListView.as_view(), name='new_list'),
 ]
